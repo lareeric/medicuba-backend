@@ -5,7 +5,10 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  origin: 'https://medicuba-frontend-production.up.railway.app',
+  origin: [
+    'http://localhost:5173',
+    'https://medicuba-frontend-production.up.railway.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
@@ -19,6 +22,7 @@ const quizRoutes      = require('./routes/quiz');
 const notesRoutes     = require('./routes/notes');
 const favorisRoutes   = require('./routes/favoris');
 const planningRoutes  = require('./routes/planning');
+const adminRoutes = require('./routes/admin');
 
 app.use('/api/auth',      authRoutes);
 app.use('/api/cours',     coursRoutes);
@@ -28,6 +32,7 @@ app.use('/api/quiz',      quizRoutes);
 app.use('/api/notes',     notesRoutes);
 app.use('/api/favoris',   favorisRoutes);
 app.use('/api/planning',  planningRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'MediCuba API en ligne !' });

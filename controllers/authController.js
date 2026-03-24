@@ -55,9 +55,9 @@ const connexion = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: utilisateur.id, prenom: utilisateur.prenom },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
+    { id: utilisateur.id, prenom: utilisateur.prenom, is_admin: utilisateur.is_admin },
+    process.env.JWT_SECRET,
+    { expiresIn: '7d' }
     );
 
     res.json({
@@ -66,7 +66,8 @@ const connexion = async (req, res) => {
         id:            utilisateur.id,
         prenom:        utilisateur.prenom,
         email:         utilisateur.email,
-        annee_etudes:  utilisateur.annee_etudes
+        annee_etudes:  utilisateur.annee_etudes,
+        is_admin:      utilisateur.is_admin,
       }
     });
   } catch (err) {
